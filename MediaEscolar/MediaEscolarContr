@@ -1,0 +1,98 @@
+package projetos.mediaEscolar;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
+import java.text.DecimalFormat;
+
+/**
+ * Controller da Calculadora de Média Escolar.
+ * Lógica original totalmente preservada.
+ */
+public class MediaEscolarController {
+
+    private final DecimalFormat df = new DecimalFormat("0.0");
+
+    @FXML
+    public TextField tfNome;
+
+    @FXML
+    public TextField tfNota1;
+    @FXML
+    public TextField tfNota2;
+    @FXML
+    public TextField tfNota3;
+
+    @FXML
+    public Label lbResposta;
+
+    // ------------------------------------------------------------
+    // Validações auxiliares
+    // ------------------------------------------------------------
+    public boolean eMaiorQueZero(TextField tf) {
+        return Double.parseDouble(tf.getText()) >= 0;
+    }
+
+    public boolean isDouble(TextField tf) {
+        try {
+            Double.parseDouble(tf.getText());
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private double getValor(TextField tf) {
+        return Double.parseDouble(tf.getText());
+    }
+
+    // ------------------------------------------------------------
+    // Cálculo da média
+    // ------------------------------------------------------------
+    @FXML
+    public void onClickCalcularMedia() {
+
+        // Validação de campos vazios
+        if (tfNome.getText().isEmpty() ||
+            tfNota1.getText().isEmpty() ||
+            tfNota2.getText().isEmpty() ||
+            tfNota3.getText().isEmpty()) {
+
+            lbResposta.setText("É necessário preencher todos os campos!");
+            return;
+        }
+
+        // Validação de números
+        if (!isDouble(tfNota1) || !isDouble(tfNota2) || !isDouble(tfNota3)) {
+            lbResposta.setText("Os campos de notas só aceitam números!");
+            return;
+        }
+
+        // Validação de valores não negativos
+        if (!eMaiorQueZero(tfNota1) || !eMaiorQueZero(tfNota2) || !eMaiorQueZero(tfNota3)) {
+            lbResposta.setText("As notas não podem ser menor que zero!");
+            return;
+        }
+
+        // Cálculo da média
+        String nome = tfNome.getText();
+        double nota1 = getValor(tfNota1);
+        double nota2 = getValor(tfNota2);
+        double nota3 = getValor(tfNota3);
+        double media = (nota1 + nota2 + nota3) / 3;
+
+        // Determinação da situação final
+        String situacaoFinal;
+        if (media >= 7) {
+            situacaoFinal = "Aprovado";
+        } else if (media >= 4) {
+            situacaoFinal = "Recuperação";
+        } else {
+            situacaoFinal = "Reprovado";
+        }
+
+        // Exibição do resultado
+        lbResposta.setText(nome + " — Média: " + df.format(media) + " — " + situacaoFinal);
+    }
+}
