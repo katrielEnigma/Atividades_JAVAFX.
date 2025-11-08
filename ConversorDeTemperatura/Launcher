@@ -1,0 +1,14 @@
+package projetos.conversorDeTemperatura;
+
+import javafx.application.Application;
+
+/**
+ * Classe de inicialização do conversor de temperatura.
+ * Responsável apenas por iniciar o JavaFX.
+ */
+public class Launcher {
+
+    public static void main(String[] args) {
+        Application.launch(ConversorApplication.class, args);
+    }
+}
