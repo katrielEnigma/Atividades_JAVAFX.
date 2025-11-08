@@ -1,0 +1,14 @@
+package projetos.mediaEscolar;
+
+import javafx.application.Application;
+
+/**
+ * Classe de inicialização da Calculadora de Média Escolar.
+ * Responsável apenas por iniciar a aplicação JavaFX.
+ */
+public class Launcher {
+
+    public static void main(String[] args) {
+        Application.launch(MediaEscolarApplication.class, args);
+    }
+}
