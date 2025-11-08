@@ -1,0 +1,14 @@
+package projetos.calculadoraDeOperacoesBasicas;
+
+import javafx.application.Application;
+
+/**
+ * Classe de inicialização da calculadora.
+ * Responsável apenas por chamar a aplicação JavaFX.
+ */
+public class Launcher {
+
+    public static void main(String[] args) {
+        Application.launch(CalculadoraApplication.class, args);
+    }
+}
