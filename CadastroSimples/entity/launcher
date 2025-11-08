@@ -1,0 +1,14 @@
+package projetos.cadastroSimples;
+
+import javafx.application.Application;
+
+/**
+ * Classe de entrada da aplicação.
+ * Responsável apenas por iniciar o JavaFX chamando a classe principal.
+ */
+public class Launcher {
+
+    public static void main(String[] args) {
+        Application.launch(CadastroSimplesApplication.class, args);
+    }
+}
