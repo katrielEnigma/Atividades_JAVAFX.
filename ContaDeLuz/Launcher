@@ -1,0 +1,14 @@
+package projetos.contaDeLuz;
+
+import javafx.application.Application;
+
+/**
+ * Classe de inicialização da aplicação de Conta de Luz.
+ * Responsável apenas por iniciar o JavaFX.
+ */
+public class Launcher {
+
+    public static void main(String[] args) {
+        Application.launch(ContaDeLuzApplication.class, args);
+    }
+}
