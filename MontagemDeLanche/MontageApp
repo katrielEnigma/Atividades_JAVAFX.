@@ -1,0 +1,28 @@
+package projetos.montagemDeLanche;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+/**
+ * Aplicação responsável por carregar e exibir o sistema de Montagem de Lanche.
+ */
+public class MontagemDeLancheApplication extends Application {
+
+    @Override
+    public void start(Stage stage) throws Exception {
+
+        // Carrega a interface definida no FXML
+        FXMLLoader loader =
+                new FXMLLoader(MontagemDeLancheApplication.class.getResource("montagem-lanche-view.fxml"));
+
+        // Cria a cena principal
+        Scene scene = new Scene(loader.load(), 800, 500);
+
+        // Configurações da janela
+        stage.setTitle("Montagem de Lanche");
+        stage.setScene(scene);
+        stage.show();
+    }
+}
