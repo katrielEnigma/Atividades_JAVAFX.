@@ -1,0 +1,51 @@
+package projetos.montagemDeLanche;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Controller da Montagem de Lanche.
+ * Lógica original totalmente preservada.
+ */
+public class MontagemDeLancheController {
+
+    // Grupo para opções de carne (escolha única)
+    public final ToggleGroup group = new ToggleGroup();
+
+    // Lista para armazenar todas os CheckBoxes de adicionais
+    public final List<CheckBox> checkBoxes = new ArrayList<>();
+
+    // Componentes gerais
+    @FXML
+    public TextField tfNome;
+
+    @FXML
+    public Label lbResposta;
+
+    @FXML
+    public Button btnGerarPedido;
+
+    // RadioButtons
+    @FXML
+    public RadioButton rbBovina;
+
+    @FXML
+    public RadioButton rbFrango;
+
+    @FXML
+    public RadioButton rbSoja;
+
+    // CheckBoxes
+    @FXML
+    public CheckBox cbBacon;
+
+    @FXML
+    public CheckBox cbQueijo;
+
+    @FXML
+    public CheckBox cbSalada;
+
+    @F
