@@ -1,0 +1,138 @@
+package projetos.cadastroSimples;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import projetos.cadastroSimples.entity.Aluno;
+
+public class CadastroSimplesController {
+
+    // Lista observável que alimenta a tabela
+    public final ObservableList<Aluno> alunos = FXCollections.observableArrayList();
+
+    // Campos de entrada
+    @FXML
+    public TextField tfNome;
+    @FXML
+    public TextField tfIdade;
+    @FXML
+    public ComboBox<String> cbCurso;
+
+    // Campo para avisos de validação
+    @FXML
+    public Label lbAviso;
+
+    // Componentes da tabela
+    @FXML
+    public TableView<Aluno> tbAlunos;
+    @FXML
+    public TableColumn<Aluno, String> tcNome;
+    @FXML
+    public TableColumn<Aluno, Integer> tcIdade;
+    @FXML
+    public TableColumn<Aluno, String> tcCurso;
+    @FXML
+    public TableColumn<Aluno, Void> tcAcao;
+
+    // ----------------------------
+    // Validações simples
+    // ----------------------------
+    public boolean eMaiorQueZero(TextField tf) {
+        return Integer.parseInt(tf.getText()) > 0;
+    }
+
+    public boolean isInteger(TextField tf) {
+        try {
+            Integer.parseInt(tf.getText());
+            return true;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+    }
+
+    // ----------------------------
+    // Botão de deletar dentro da tabela
+    // ----------------------------
+    private void adicionarBotaoDeletar() {
+        tcAcao.setCellFactory(param -> new TableCell<>() {
+
+            private final Button botaoDeletar = new Button("Deletar");
+
+            {
+                botaoDeletar.setOnAction(event -> {
+                    Aluno aluno = getTableView().getItems().get(getIndex());
+                    alunos.remove(aluno);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : botaoDeletar);
+            }
+        });
+    }
+
+    // ----------------------------
+    // Inicialização automática (JavaFX)
+    // ----------------------------
+    @FXML
+    public void initialize() {
+
+        // Preenche o ComboBox
+        cbCurso.getItems().addAll(
+                "Curso 1", "Curso 2", "Curso 3", "Curso 4", "Curso 5"
+        );
+        cbCurso.setValue("Curso 1");
+
+        // Mapeia as propriedades da entidade para as colunas da tabela
+        tcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        tcIdade.setCellValueFactory(new PropertyValueFactory<>("idade"));
+        tcCurso.setCellValueFactory(new PropertyValueFactory<>("curso"));
+
+        // Vincula a lista à tabela
+        tbAlunos.setItems(alunos);
+
+        // Adiciona o botão de deletar
+        adicionarBotaoDeletar();
+    }
+
+    // ----------------------------
+    // Botão: Cadastrar
+    // ----------------------------
+    @FXML
+    public void onClickCadastrar() {
+
+        if (tfNome.getText().isEmpty() ||
+            tfIdade.getText().isEmpty() ||
+            cbCurso.getValue().isEmpty()) {
+
+            lbAviso.setText("Preencha todos os campos!");
+
+        } else if (!isInteger(tfIdade)) {
+
+            lbAviso.setText("A idade precisa ser um número inteiro!");
+
+        } else if (!eMaiorQueZero(tfIdade)) {
+
+            lbAviso.setText("A idade precisa ser maior que zero");
+
+        } else {
+
+            String nome = tfNome.getText();
+            Integer idade = Integer.parseInt(tfIdade.getText());
+            String curso = cbCurso.getValue();
+
+            // Cria novo aluno e adiciona na lista
+            alunos.add(new Aluno(nome, idade, curso));
+
+            // Limpa campos
+            lbAviso.setText("");
+            tfNome.clear();
+            tfIdade.clear();
+            cbCurso.setValue("Curso 1");
+        }
+    }
+}
