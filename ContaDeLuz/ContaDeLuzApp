@@ -1,0 +1,28 @@
+package projetos.contaDeLuz;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+/**
+ * Aplicação responsável por carregar e exibir o simulador de conta de luz.
+ */
+public class ContaDeLuzApplication extends Application {
+
+    @Override
+    public void start(Stage stage) throws Exception {
+
+        // Carrega o layout definido no arquivo FXML
+        FXMLLoader loader =
+                new FXMLLoader(ContaDeLuzApplication.class.getResource("conta-de-luz-view.fxml"));
+
+        // Cena com tamanho fixo
+        Scene scene = new Scene(loader.load(), 800, 500);
+
+        // Configurações da janela
+        stage.setTitle("Simulador de Conta de Luz");
+        stage.setScene(scene);
+        stage.show();
+    }
+}
