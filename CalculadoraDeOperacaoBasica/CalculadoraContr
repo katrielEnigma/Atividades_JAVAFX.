@@ -1,0 +1,74 @@
+package projetos.calculadoraDeOperacoesBasicas;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
+import java.text.DecimalFormat;
+
+/**
+ * Controller da calculadora de operações básicas.
+ * Mantém toda a lógica original, apenas com leve organização.
+ */
+public class CalculadoraController {
+
+    private final DecimalFormat df = new DecimalFormat("0.0");
+
+    @FXML
+    public TextField tfPrimeiroNumero;
+
+    @FXML
+    public TextField tfSegundoNumero;
+
+    @FXML
+    public Label labelResultado;
+
+    // ----------------------------
+    // Métodos auxiliares
+    // ----------------------------
+    private double getPrimeiroNumero() {
+        return Double.parseDouble(tfPrimeiroNumero.getText());
+    }
+
+    private double getSegundoNumero() {
+        return Double.parseDouble(tfSegundoNumero.getText());
+    }
+
+    private void mostrarResultado(double valor) {
+        labelResultado.setText("Resultado: " + df.format(valor));
+    }
+
+    // ----------------------------
+    // Operações da calculadora
+    // ----------------------------
+    @FXML
+    public void onClickAdicao() {
+        double resultado = getPrimeiroNumero() + getSegundoNumero();
+        mostrarResultado(resultado);
+    }
+
+    @FXML
+    public void onClickSubtracao() {
+        double resultado = getPrimeiroNumero() - getSegundoNumero();
+        mostrarResultado(resultado);
+    }
+
+    @FXML
+    public void onClickDivisao() {
+        double resultado = getPrimeiroNumero() / getSegundoNumero();
+        mostrarResultado(resultado);
+    }
+
+    @FXML
+    public void onClickMultiplicacao() {
+        double resultado = getPrimeiroNumero() * getSegundoNumero();
+        mostrarResultado(resultado);
+    }
+
+    @FXML
+    public void onClickClearFields() {
+        tfPrimeiroNumero.clear();
+        tfSegundoNumero.clear();
+        labelResultado.setText("O resultado vai aparecer aqui!");
+    }
+}
