@@ -1,0 +1,28 @@
+package projetos.mediaEscolar;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+/**
+ * Aplicação responsável por carregar e exibir a calculadora de média escolar.
+ */
+public class MediaEscolarApplication extends Application {
+
+    @Override
+    public void start(Stage stage) throws Exception {
+
+        // Carrega o arquivo FXML da interface
+        FXMLLoader loader =
+                new FXMLLoader(MediaEscolarApplication.class.getResource("media-escolar-view.fxml"));
+
+        // Cria a cena principal
+        Scene scene = new Scene(loader.load(), 448, 448);
+
+        // Configurações da janela
+        stage.setTitle("Calculadora de Média");
+        stage.setScene(scene);
+        stage.show();
+    }
+}
